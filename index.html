@@ -414,6 +414,21 @@
       box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     }
 
+    .product-img-container {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      margin-bottom: 1rem;
+      border-radius: 1rem;
+      overflow: hidden;
+      background: rgba(0,0,0,0.2);
+    }
+
+    .product-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
     .product-name {
       font-size: 1.2rem;
       font-weight: 700;
@@ -680,6 +695,9 @@
         <div class="product-grid">
           <!-- Product 1 -->
           <article class="product-card">
+            <div class="product-img-container">
+              <img src="assets/bud1.png" alt="Classic Bud Coin" class="product-img">
+            </div>
             <div class="product-badge common">Common</div>
             <h3 class="product-name">Classic Bud Coin</h3>
             <p class="product-desc">
@@ -689,6 +707,9 @@
           </article>
           <!-- Product 2 -->
           <article class="product-card">
+            <div class="product-img-container">
+              <img src="assets/bud2.png" alt="Silver Rush Coin" class="product-img">
+            </div>
             <div class="product-badge uncommon">Uncommon</div>
             <h3 class="product-name">Silver Rush Coin</h3>
             <p class="product-desc">
@@ -698,6 +719,9 @@
           </article>
           <!-- Product 3 -->
           <article class="product-card">
+            <div class="product-img-container">
+              <img src="assets/bud3.png" alt="Midnight Kush Coin" class="product-img">
+            </div>
             <div class="product-badge rare">Rare</div>
             <h3 class="product-name">Midnight Kush Coin</h3>
             <p class="product-desc">
@@ -722,21 +746,30 @@
       <div class="why-grid">
         <div class="why-card">
           <h3 style="color:var(--accent-primary)">Total Supply</h3>
-          <p style="font-size:1.5rem; font-weight:700; color:#fff;">1,000,000,000</p>
+          <p style="font-size:1.5rem; font-weight:700; color:#fff;">420,000,000</p>
           <p style="font-size:0.8rem; opacity:0.6">GRUSH</p>
         </div>
         <div class="why-card">
-          <h3 style="color:var(--accent-primary)">Circulating</h3>
-          <p style="font-size:1.5rem; font-weight:700; color:#fff;">420,000,000</p>
-          <p style="font-size:0.8rem; opacity:0.6">GRUSH</p>
+          <h3 style="color:var(--accent-primary)">Distribution</h3>
+          <ul style="list-style:none; padding:0; margin:0; font-size:0.95rem; color:#fff; font-weight:600;">
+            <li style="display:flex; justify-content:space-between; margin-bottom:0.4rem; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:0.4rem;">
+              <span style="opacity:0.8">Liquidity Pool</span>
+              <span>89%</span>
+            </li>
+            <li style="display:flex; justify-content:space-between; margin-bottom:0.4rem; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:0.4rem;">
+              <span style="opacity:0.8">Dev</span>
+              <span>6.80%</span>
+            </li>
+            <li style="display:flex; justify-content:space-between;">
+              <span style="opacity:0.8">Weed</span>
+              <span>4.20%</span>
+            </li>
+          </ul>
         </div>
         <div class="why-card">
           <h3 style="color:var(--accent-primary)">Market Cap</h3>
           <p style="font-size:1.5rem; font-weight:700; color:#fff;">$---</p>
           <p style="font-size:0.8rem; opacity:0.6">Est. Value</p>
-        </div>
-        <div class="why-card" style="display:flex; align-items:center; justify-content:center;">
-          <a class="btn-primary full" href="#shop">Buy in Shop</a>
         </div>
       </div>
     </section>
@@ -748,27 +781,20 @@
           <h1 class="hero-title small">GreenRush Shop</h1>
           <p class="hero-subtitle">
             Pick your strain of wealth. All items are purchased with the
-            GreenRush supply (GRUSH).
+            GreenRush supply (GRUSH). 
           </p>
         </div>
       </section>
 
       <!-- FILTER BAR (visual only) -->
-      <section class="filters">
-        <div class="filters-inner">
-          <span class="filter-label">Sort by:</span>
-          <button class="filter-pill active">Most Popular</button>
-          <button class="filter-pill">Highest Rarity</button>
-          <button class="filter-pill">New Drops</button>
-          <button class="filter-pill">Low Supply</button>
-        </div>
-      </section>
-
       <!-- PRODUCT GRID -->
       <section class="shop-grid-section">
         <div class="product-grid">
           <!-- Common -->
           <article class="product-card">
+            <div class="product-img-container">
+              <img src="assets/bud1.png" alt="Classic Bud Coin" class="product-img">
+            </div>
             <div class="product-badge common">Common</div>
             <h3 class="product-name">Classic Bud Coin</h3>
             <p class="product-desc">
@@ -781,6 +807,9 @@
 
           <!-- Uncommon -->
           <article class="product-card">
+            <div class="product-img-container">
+              <img src="assets/bud2.png" alt="Silver Rush Coin" class="product-img">
+            </div>
             <div class="product-badge uncommon">Uncommon</div>
             <h3 class="product-name">Silver Rush Coin</h3>
             <p class="product-desc">
@@ -793,6 +822,9 @@
 
           <!-- Rare -->
           <article class="product-card">
+            <div class="product-img-container">
+              <img src="assets/bud3.png" alt="Midnight Kush Coin" class="product-img">
+            </div>
             <div class="product-badge rare">Rare</div>
             <h3 class="product-name">Midnight Kush Coin</h3>
             <p class="product-desc">
@@ -805,6 +837,9 @@
 
           <!-- Epic -->
           <article class="product-card">
+            <div class="product-img-container">
+              <img src="assets/bud4.png" alt="Crystallized Blaze Coin" class="product-img">
+            </div>
             <div class="product-badge epic">Epic</div>
             <h3 class="product-name">Crystallized Blaze Coin</h3>
             <p class="product-desc">
@@ -817,6 +852,9 @@
 
           <!-- Legendary -->
           <article class="product-card">
+            <div class="product-img-container">
+              <img src="assets/bud5.png" alt="Royal Green Coin" class="product-img">
+            </div>
             <div class="product-badge legendary">Legendary</div>
             <h3 class="product-name">Royal Green Coin</h3>
             <p class="product-desc">
@@ -929,7 +967,7 @@
         connectBtn.textContent = shortenAddress(walletPubkey.toString());
         connectBtn.classList.add('active');
         showToast('Wallet connected');
-        await renderWalletPanel();
+        // await renderWalletPanel(); // Removed per request
       } catch (err) {
         console.error('Connect failed', err);
       }
@@ -942,7 +980,7 @@
       walletPubkey = null;
       connectBtn.textContent = 'Connect Wallet';
       connectBtn.classList.remove('active');
-      await renderWalletPanel();
+      // await renderWalletPanel(); // Removed per request
     }
 
     connectBtn.addEventListener('click', async () => {
@@ -1045,9 +1083,9 @@
       if (provider && provider.isConnected) {
         walletPubkey = provider.publicKey;
         connectBtn.textContent = shortenAddress(walletPubkey.toString());
-        await renderWalletPanel();
+        // await renderWalletPanel(); // Removed per request
       } else {
-        await renderWalletPanel();
+        // await renderWalletPanel(); // Removed per request
       }
     })();
 
