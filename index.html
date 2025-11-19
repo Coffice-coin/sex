@@ -25,6 +25,10 @@
       padding: 0;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       background-color: var(--bg-dark);
       background-image: 
@@ -131,10 +135,12 @@
       letter-spacing: -0.02em;
       font-weight: 800;
       margin-bottom: 1.5rem;
-      background: linear-gradient(180deg, #fff 0%, #e0e0e0 100%);
+      background: linear-gradient(135deg, #fff 20%, var(--accent-primary) 50%, #fff 80%);
+      background-size: 200% auto;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      animation: textShine 5s linear infinite;
     }
 
     .hero-title.small {
@@ -173,7 +179,14 @@
     }
     
     .mascot-card::after {
-      display: none;
+      content: '';
+      position: absolute;
+      inset: 10%;
+      background: radial-gradient(circle, var(--accent-primary), transparent 60%);
+      opacity: 0.2;
+      filter: blur(40px);
+      z-index: -1;
+      animation: pulseGlow 4s ease-in-out infinite alternate;
     }
 
     .mascot-img {
@@ -411,7 +424,9 @@
     .product-card:hover {
       transform: translateY(-8px);
       border-color: var(--accent-primary);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      box-shadow: 
+        0 10px 30px rgba(0, 230, 118, 0.2),
+        0 0 20px rgba(155, 123, 255, 0.15); /* Green + Purple glow */
     }
 
     .product-img-container {
@@ -511,60 +526,6 @@
       margin: 0 auto;
     }
 
-    .filters {
-      margin-bottom: 3rem;
-      display: flex;
-      justify-content: center;
-    }
-
-    .filters-inner {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-      align-items: center;
-      background: rgba(255,255,255,0.03);
-      padding: 0.5rem;
-      border-radius: 1rem;
-      border: 1px solid var(--border-light);
-    }
-
-    .filter-label {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--text-muted);
-      margin-left: 0.5rem;
-      margin-right: 0.5rem;
-    }
-
-    .filter-pill {
-      border-radius: 0.8rem;
-      border: 1px solid transparent;
-      padding: 0.5rem 1.2rem;
-      font-size: 0.85rem;
-      background: transparent;
-      color: var(--text-muted);
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .filter-pill.active,
-    .filter-pill:hover {
-      background: rgba(255,255,255,0.05);
-      color: #fff;
-      border-color: var(--border-light);
-    }
-    
-    .filter-pill.active {
-      background: var(--accent-primary);
-      color: #000;
-      font-weight: 600;
-    }
-
-    .shop-grid-section {
-      margin-bottom: 6rem;
-    }
-
     /* ===== Footer ===== */
 
     .gr-footer {
@@ -572,10 +533,26 @@
       padding: 2rem 6vw;
       font-size: 0.9rem;
       display: flex;
-      justify-content: space-between;
-      gap: 1rem;
+      justify-content: center;
+      align-items: center;
+      gap: 0.6rem;
       color: var(--text-muted);
       background: #020202;
+      text-align: center;
+      flex-wrap: wrap;
+    }
+
+    /* Footer text link */
+    .footer-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .footer-link:hover {
+      color: var(--accent-primary);
+      text-decoration: underline;
+      text-underline-offset: 2px;
     }
 
     /* ===== Responsive ===== */
@@ -614,6 +591,52 @@
       .gr-footer {
         padding-inline: 5vw;
       }
+    }
+
+    /* ===== Animations ===== */
+    @keyframes textShine {
+      to { background-position: 200% center; }
+    }
+
+    @keyframes pulseGlow {
+      0% { opacity: 0.15; transform: scale(0.8); }
+      100% { opacity: 0.4; transform: scale(1.2); }
+    }
+
+    @keyframes ambientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Ambient background mesh */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: 
+        radial-gradient(circle at 15% 50%, rgba(0, 230, 118, 0.03), transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(155, 123, 255, 0.03), transparent 25%);
+      z-index: -1;
+      pointer-events: none;
+      animation: ambientShift 10s ease-in-out infinite;
+      background-size: 200% 200%;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .reveal {
+      animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      opacity: 0;
     }
   </style>
 </head>
@@ -786,7 +809,6 @@
         </div>
       </section>
 
-      <!-- FILTER BAR (visual only) -->
       <!-- PRODUCT GRID -->
       <section class="shop-grid-section">
         <div class="product-grid">
@@ -871,7 +893,8 @@
 
   <footer class="gr-footer">
     <span>© 2025 GREENRUSH</span>
-    <span>Shop drops, not promises.</span>
+    <span aria-hidden="true">•</span>
+    <a class="footer-link" href="https://x.com/YOUR_HANDLE" target="_blank" rel="noopener noreferrer"> X</a>
   </footer>
   <div id="gr-toast" role="status" aria-live="polite">Copied contract</div>
 
@@ -934,7 +957,9 @@
     const connection = new solanaWeb3.Connection(solanaWeb3.clusterApiUrl(SOLANA_NETWORK));
 
     // Replace with the seller's SOL address that receives payments
-    const SELLER_ADDRESS = 'SELLER_SOL_ADDRESS_HERE';
+    const SELLER_ADDRESS = 'SELLER_SOL_ADDRESS_HERE'; // Treasury SOL address
+    const TOKEN_MINT = 'TOKEN_MINT_ADDRESS_HERE'; // SPL token mint address
+    const TOKEN_RATE_SOL = 1000; // Display: GRUSH per 1 SOL (demo)
 
     function getProvider() {
       // Phantom and many Solana wallets inject `window.solana`.
@@ -967,7 +992,7 @@
         connectBtn.textContent = shortenAddress(walletPubkey.toString());
         connectBtn.classList.add('active');
         showToast('Wallet connected');
-        // await renderWalletPanel(); // Removed per request
+        await renderWalletPanel();
       } catch (err) {
         console.error('Connect failed', err);
       }
@@ -980,7 +1005,7 @@
       walletPubkey = null;
       connectBtn.textContent = 'Connect Wallet';
       connectBtn.classList.remove('active');
-      // await renderWalletPanel(); // Removed per request
+      await renderWalletPanel();
     }
 
     connectBtn.addEventListener('click', async () => {
@@ -1006,22 +1031,42 @@
       panel.innerHTML = `
         <div class="why-card" style="display:flex;flex-direction:column;gap:1rem; border-color:var(--accent-primary);">
           <div style="display:flex;justify-content:space-between;align-items:center; border-bottom:1px solid var(--border-light); padding-bottom:0.8rem;">
-            <strong style="color:#fff;">Wallet Connected</strong>
+            <strong style="color:#fff;">Wallet ${walletPubkey ? 'Connected' : 'Disconnected'}</strong>
             <span id="gr-wallet-addr" style="font-family:monospace; background:rgba(255,255,255,0.1); padding:0.2rem 0.6rem; border-radius:6px;">${walletPubkey ? shortenAddress(walletPubkey.toString()) : 'Not connected'}</span>
           </div>
-          <div style="display:flex;gap:1rem;align-items:center; flex-wrap:wrap;">
+          <div style="display:flex;gap:1rem;align-items:flex-end; flex-wrap:wrap;">
             <div style="flex:1;">
-              <label style="font-size:0.8rem; text-transform:uppercase; letter-spacing:0.05em; color:var(--text-muted); display:block; margin-bottom:0.4rem;">Amount (SOL)</label>
-              <input id="gr-buy-amount" type="number" min="0.001" step="0.001" value="0.01" style="width:100%; padding:0.6rem; border-radius:8px; background:rgba(0,0,0,0.3); border:1px solid var(--border-light); color:#fff; font-family:inherit;">
+              <label style="font-size:0.6rem; text-transform:uppercase; letter-spacing:0.05em; color:var(--text-muted); display:block; margin-bottom:0.35rem;">Amount (SOL)</label>
+              <input id="gr-buy-amount" type="number" min="0.001" step="0.001" value="0.05" style="width:100%; padding:0.55rem; border-radius:8px; background:rgba(0,0,0,0.3); border:1px solid var(--border-light); color:#fff; font-family:inherit;">
             </div>
-            <button id="gr-buy-btn" class="btn-primary" style="margin-top:1.4rem;">Buy Tokens</button>
+            <div style="min-width:120px; text-align:right;">
+              <div style="font-size:0.6rem; text-transform:uppercase; letter-spacing:0.05em; color:var(--text-muted); margin-bottom:0.25rem;">Est. GRUSH</div>
+              <div id="gr-buy-est" style="font-size:0.9rem; font-weight:600; color:var(--accent-primary);">-</div>
+            </div>
+            <button id="gr-buy-btn" class="btn-primary" style="flex:1;">Buy GRUSH</button>
           </div>
+          <div id="gr-buy-preview" style="font-size:0.65rem; color:var(--text-muted);"></div>
           <div id="gr-buy-status" style="font-size:0.85rem; color:var(--accent-primary); min-height:1.2em;"></div>
+          <div style="font-size:0.55rem; line-height:1.3; opacity:0.55;">
+            Demo only: sends SOL to treasury (<code style="font-size:0.55rem;">${SELLER_ADDRESS.slice(0,4)}…${SELLER_ADDRESS.slice(-4)}</code>). Actual GRUSH SPL token delivery requires backend / on-chain program using mint <code style="font-size:0.55rem;">${TOKEN_MINT.slice(0,6)}…</code>.
+          </div>
         </div>
       `;
       tokenInfo.appendChild(panel);
 
       const buyBtn = document.getElementById('gr-buy-btn');
+      const amtInput = document.getElementById('gr-buy-amount');
+      const estEl = document.getElementById('gr-buy-est');
+      function updateEstimate() {
+        const v = parseFloat(amtInput.value);
+        if (!v || v <= 0) { estEl.textContent='-'; return; }
+        const est = v * TOKEN_RATE_SOL;
+        estEl.textContent = est.toLocaleString('en-US');
+        const preview = document.getElementById('gr-buy-preview');
+        preview.textContent = `Rate: 1 SOL ≈ ${TOKEN_RATE_SOL.toLocaleString()} GRUSH`;
+      }
+      amtInput.addEventListener('input', updateEstimate);
+      updateEstimate();
       buyBtn.addEventListener('click', doBuy);
       await updateBalanceDisplay();
     }
@@ -1067,7 +1112,8 @@
         status.textContent = `Transaction sent — signature: ${sig}. Waiting for confirmation...`;
 
         await connection.confirmTransaction(sig, 'confirmed');
-        status.textContent = `Purchase complete — tx: ${sig}`;
+        const estTokens = solAmount * TOKEN_RATE_SOL;
+        status.textContent = `Purchase complete — tx: ${sig} | Est. ${estTokens.toLocaleString('en-US')} GRUSH`;
         showToast('Purchase sent');
 
         // TODO: Notify backend (e.g., via fetch) to deliver/mint tokens to buyer.
@@ -1083,11 +1129,28 @@
       if (provider && provider.isConnected) {
         walletPubkey = provider.publicKey;
         connectBtn.textContent = shortenAddress(walletPubkey.toString());
-        // await renderWalletPanel(); // Removed per request
-      } else {
-        // await renderWalletPanel(); // Removed per request
       }
+      await renderWalletPanel();
     })();
+
+    // ===== Scroll Animations =====
+    const revealElements = document.querySelectorAll('.why-card, .product-card, .section-title, .hero-left > *, .mascot-card');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('reveal');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    revealElements.forEach(el => {
+      observer.observe(el);
+    });
 
   </script>
 </body>
